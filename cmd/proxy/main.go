@@ -96,7 +96,7 @@ func fetchUrl(ctx context.Context, client *http.Client, url string, headers http
 		if err != nil {
 			return nil, fmt.Errorf("cannot create request: %v", err)
 		}
-		req.WithContext(ctx)
+		req = req.WithContext(ctx)
 		delete(headers, "Host")
 		req.Header = headers
 
