@@ -31,13 +31,20 @@ func main() {
 		}
 	}()
 
-	http.Handle("/", &handler{p})
+	client, err := proxi.Client(p)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	f := proxi.NewFetcher(client, 10*time.Second, 5)
+
+	http.Handle("/", &handler{f})
 
 	log.Fatal(http.ListenAndServe("0.0.0.0:80", nil))
 }
 
 type handler struct {
-	p *pool.ProxyListDownloadPool
+	f proxi.Fetcher
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -57,18 +64,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	client, err := proxi.Client(h.p)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		e := fmt.Sprintf("cannot create client: %v", err)
-		log.Println(e)
-		io.WriteString(w, e)
-		return
-	}
-
-	f := proxi.NewFetcher(client, 10*time.Second, 5)
-
-	resp, err := f.Fetch(r.Context(), url.String(), r.Header.Clone())
+	resp, err := h.f.Fetch(r.Context(), url.String(), r.Header.Clone())
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		e := fmt.Sprintf("cannot request url %s: %v", pageURL, err)
