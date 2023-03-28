@@ -1,2 +1,6 @@
 github.com/wawan93/proxi v0.4.1 h1:q7/8U5SL850ZfrUbEGCb4R1WF6gpx/iswqhC/WbgGHw=
 github.com/wawan93/proxi v0.4.1/go.mod h1:V41YC8V2UDyDmLxDEjtako7lU+9PetjE61D06WcFenk=
+github.com/wawan93/proxi v0.5.0 h1:na8IaS7+Rb75AhO+upwhxPH+RM7ziSIrpqOdKZbw5Zg=
+github.com/wawan93/proxi v0.5.0/go.mod h1:oXSeb5NqC5RBM0n7AR5U98uxADDTWBAlQfYDwP66Aew=
+github.com/wawan93/proxi v0.5.1 h1:CU7Mauw862uV7oxVHI2QCfxvcWHz8781+BTux5kDml8=
+github.com/wawan93/proxi v0.5.1/go.mod h1:oXSeb5NqC5RBM0n7AR5U98uxADDTWBAlQfYDwP66Aew=

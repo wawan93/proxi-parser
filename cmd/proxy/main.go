@@ -64,7 +64,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := h.f.Fetch(r.Context(), url.String(), r.Header.Clone())
+	resp, err := h.f.Fetch(r.Context(), http.MethodGet, url.String(), r.Header.Clone(), r.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		e := fmt.Sprintf("cannot request url %s: %v", pageURL, err)
